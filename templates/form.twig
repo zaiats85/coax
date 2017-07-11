@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    {#<link href="../vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">#}
+
+
+</head>
+<body>
+
+<div class="jumbotron text-center">
+    <h1 class="display-5">Coax Test</h1>
+    <p class="lead text-uppercase">Twitter search api</p>
+</div>
+
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-8 col-auto">
+            <form action="../index.php" method="post">
+                <div class="input-group">
+                    <input type="text" name="query" required class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">Go!</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if tweets is defined %}
+        <div class="row justify-content-center">
+            {% for error in errors %}
+                <p>{{ error.message }}</p>
+            {% endfor %}
+
+            {% if tweets|length == 0 %}
+                <div id="nothing_found" class="col-4 text-center">Nothing found, sorry</div>
+            {% endif %}
+
+            {% for tweet in tweets %}
+
+                <div class="card" style="width: 20rem; margin: 10px">
+                    <img class="card-img-top"
+                         src="{{ tweet.user.profile_banner_url | default("https://pbs.twimg.com/profile_banners/335964986/1453050578") }}"
+                         alt="Card image cap" style="width: 100%">
+                    <div class="card-block">
+                        <p>Created At: {{ tweet.created_at|date("d M Y") }}</p>
+                        <h4 class="card-title">{{ tweet.user.name }}</h4>
+                        <p class="card-text">{{ tweet.text }}</p>
+                        <p>Friends: {{ tweet.user.friends_count }}</p>
+                        <p>Followers: {{ tweet.user.followers_count }}</p>
+                        {% if tweet.user.url %}
+                            <a href="{{ tweet.user.url }}" class="btn btn-primary">CheckItOut</a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    {% endif %}
+
+</div>
+
+<script src="../vendor/components/jquery/jquery.min.js"></script>
+<script src="../vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+    "require": {
+        "abraham/twitteroauth": "^0.7.4",
+        "educoder/pest": "1.0.0",
+        "components/bootstrap": "^3.3",
+        "components/bootstrap-default": "^3.3",
+        "twig/twig": "~2.0",
+        "twbs/bootstrap": "^3.3"
+    }
+}
