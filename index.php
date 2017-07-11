@@ -5,7 +5,6 @@ include './config.php';
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 $loader = new Twig_Loader_Filesystem(__DIR__.'/templates');
-
 $twig = new Twig_Environment($loader, array());
 
 if (isset($_POST['query']) && $_SERVER["REQUEST_METHOD"] == "POST"){
